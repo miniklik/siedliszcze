@@ -1674,8 +1674,12 @@ body:not(.tryb-admin) .btn-opis-miasta{color:#fff;text-shadow:0 1px 2px rgba(0,0
   border:1px solid rgba(243,205,130,.25);border-radius:10px;
   margin-bottom:8px;background:rgba(0,0,0,.18)}
 .kat-wiersz .kw-naz{flex:1;font-size:15px;color:var(--tekst)}
-.kat-usun{background:none;border:none;cursor:pointer;font-size:16px;opacity:.65;padding:4px}
-.kat-usun:hover{opacity:1}
+.kat-usun{
+  background:rgba(224,90,74,.14);border:1.5px solid rgba(224,90,74,.4);
+  border-radius:7px;cursor:pointer;font-size:16px;padding:5px 9px;
+  color:#e05a4a;opacity:1;transition:all .15s;flex-shrink:0;
+}
+.kat-usun:hover{background:rgba(224,90,74,.28);border-color:#e05a4a}
 .kat-pusto{font-size:13.5px;color:var(--tekst-2);font-style:italic;padding:2px 2px 10px}
 
 /* Licznik widoczny TYLKO w trybie admin (?admin=1) - w trybie wędrowca i w wygenerowanej mapie ukryty */
