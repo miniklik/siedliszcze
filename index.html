@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<title>Siedliszcze</title>
+<title>Miasto - Siedliszcze</title>
 
 <!-- Leaflet (mapa) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -1115,19 +1115,18 @@ body:not(.tryb-admin) .pin-audio-inner.pin-audio-fala:hover{
 }
 .znacznik-kropka:hover{transform:scale(1.2)}
 
-/* Znacznik "Zaznaczone" - pulsujący X */
+/* Znacznik "Zaznaczone" - sam złoty krzyżyk, bez kółka (styl "X marks the spot") */
 .znacznik-x{
-  width:24px;height:24px;border-radius:50%;cursor:pointer;
+  width:24px;height:24px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  background:rgba(214,74,58,0.92);color:#fff;font-weight:900;font-size:14px;
-  border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,0.7));
   animation:znacznik-x-puls 1.7s ease-in-out infinite;
   transition:transform 0.15s;
 }
-.znacznik-x:hover{transform:scale(1.15)}
+.znacznik-x:hover{transform:scale(1.2)}
 @keyframes znacznik-x-puls{
-  0%,100%{box-shadow:0 2px 6px rgba(0,0,0,0.5), 0 0 0 0 rgba(214,74,58,0.55)}
-  50%{box-shadow:0 2px 6px rgba(0,0,0,0.5), 0 0 0 9px rgba(214,74,58,0)}
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.6;transform:scale(1.18)}
 }
 
 /* Przyciski edycji/usuwania na karcie listy (admin) */
@@ -1798,7 +1797,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 <div class="licznik-pobran" title="Łączna liczba pobranych map">
   <span class="lp-ikona">📥</span>
   <span class="lp-label">Pobrań</span>
-  <span class="lp-liczba" id="lp-liczba">82</span>
+  <span class="lp-liczba" id="lp-liczba">64</span>
 </div>
 
 <!-- Hamburger (dotyk, pion) -->
@@ -1808,10 +1807,10 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 
 <!-- Plakietka z nazwą mapy (tylko widok gościa - biało, rozmyte szkło) -->
 <div class="topbar-nazwa" id="topbarNazwa">
-  <span id="topbarNazwaTekst">Siedliszcze</span>
+  <span id="topbarNazwaTekst">Miasto - Siedliszcze</span>
 </div>
 <div class="herb-brak" id="topbarHerb">brak pliku<br>img/herb.jpg<br>(.png / .webp)</div>
-<img class="herb-rog" id="topbarHerbImg" alt="Herb" style="display:none" src="img/herb.webp">
+<img class="herb-rog" id="topbarHerbImg" alt="Herb" style="display:none">
 <script>
 (function wczytajHerb(){
   const img = document.getElementById('topbarHerbImg');
@@ -1836,8 +1835,8 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 <div class="opis-strony-modal" id="opisStronyModal">
   <div class="opis-strony-box">
     <button class="opis-strony-zamknij" onclick="zamknijOpisStrony()" aria-label="Zamknij">×</button>
-    <h2 id="opisStronyModalTytul">Siedliszcze</h2>
-    <div id="opisStronyModalTresc"><div class="detail-opis"><p>Gmina Siedliszcze położona jest w zachodniej części pow. chełmskiego w woj. Lubelskim. Od zachodu graniczy z gminami: Puchaczów, Milejów i od północy z gmina Cyców, od wschodu z gminami Wierzbica i Chełm, od południa z gminą Rejowiec Fabryczny.<br>Powierzchnia gminy wynosi 153,9 km2. Średnia gęstość zaludnienia wynosi 47 osób na km2. Sieć osadniczą tworzy 34 miejscowości (wsi), z których wyodrębniono 28 sołectw.<br>Sieć osadnicza gminy Siedliszcze charakteryzuje się dużym rozproszeniem zabudowy, tzw. zabudowa kolonijna występuje w 28 wsiach. Typowy układ liniowy, wzdłuż symetrycznie położonej drogi mają wsie: Mogielnica, Bezek, Majdan Zahorodyński. Osada Siedliszcze będąca w latach 1760-1821 miasteczkiem, zachowała promieniście rozchodzący się układ ulic. Do najludniejszych wsi należą: Siedliszcze, Bezek, Nowe Chojno oraz Wola Korybutowa. Siedzibą gminy jest miejscowość Siedliszcze, która pełni funkcję ośrodka administracyjnego, handlowo-usługowego i kulturalnego dla mieszkańców</p></div></div>
+    <h2 id="opisStronyModalTytul">Miasto - Siedliszcze</h2>
+    <div id="opisStronyModalTresc"><div class="detail-opis"><p>zapomniane źródła</p></div></div>
   </div>
 </div>
 
@@ -1873,7 +1872,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 </div>
 
 <!-- Pasek-podpowiedź gdy włączony tryb dodawania -->
-<div class="tryb-info" id="trybInfo">🌳 Kliknij na mapie, gdzie ma być środek/początek strefy tła.</div>
+<div class="tryb-info" id="trybInfo"></div>
 
 <!-- Panel dodawania YT (modal) + przyciemnienie -->
 <div class="panel-backdrop2" id="panelBackdrop2" onclick="zamknijPanelYT()"></div>
@@ -2060,7 +2059,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
   </div>
 
   <div id="strefaKoloBlok">
-    <label class="panel-label">Promień strefy: <span id="strefaZasiegLabel" class="akcent-zasieg">990 m</span></label>
+    <label class="panel-label">Promień strefy: <span id="strefaZasiegLabel" class="akcent-zasieg">100 m</span></label>
     <input type="range" id="strefaZasieg" min="20" max="2000" step="10" value="100" class="suwak-zasieg" oninput="aktualizujStrefaZasiegLabel()">
   </div>
 
@@ -2071,16 +2070,16 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 
   <label class="panel-label">Co ma się odtworzyć?</label>
   <div class="rozmiar-wybor" id="strefaZrodloWybor">
-    <div class="rozmiar-opcja" data-zrodlo="plik" onclick="ustawZrodloStrefa('plik')">
+    <div class="rozmiar-opcja wybrany" data-zrodlo="plik" onclick="ustawZrodloStrefa('plik')">
       <span class="ikona">📻</span>Plik mp3 — pętla klimatu
     </div>
-    <div class="rozmiar-opcja wybrany" data-zrodlo="mowa" onclick="ustawZrodloStrefa('mowa')">
+    <div class="rozmiar-opcja" data-zrodlo="mowa" onclick="ustawZrodloStrefa('mowa')">
       <span class="ikona">🗣️</span>Komunikat głosowy
     </div>
   </div>
 
   <!-- ŹRÓDŁO: PLIK MP3 -->
-  <div id="strefaPlikBlok" style="display: none;">
+  <div id="strefaPlikBlok">
     <label class="panel-label">Nazwa pliku audio</label>
     <input type="text" id="strefaPlik" maxlength="80" placeholder="np. tlo1">
     <div class="instrukcja-360" id="instrStrefa">
@@ -2100,7 +2099,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
   </div>
 
   <!-- ŹRÓDŁO: KOMUNIKAT GŁOSOWY -->
-  <div id="strefaMowaBlok" style="">
+  <div id="strefaMowaBlok" style="display:none">
     <label class="panel-label">Tekst do przeczytania <span class="opcj">(głosem przeglądarki, po polsku)</span></label>
     <textarea id="strefaTekst" maxlength="500" placeholder="np. Jesteś na ulicy Kościuszki. Po lewej zobaczysz dawny ratusz z XVIII wieku."></textarea>
     <div class="intro-hint">Odtwarza się raz, gdy gość wejdzie w strefę (nie w pętli — to komunikat, nie muzyka).</div>
@@ -2109,7 +2108,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 
   <label class="panel-label">Lokalizacja</label>
   <div class="pozycja-wiersz">
-    <div class="pozycja-tekst" id="strefaPozycjaTekst">📌 <b>51.77891, 17.23975</b></div>
+    <div class="pozycja-tekst" id="strefaPozycjaTekst">Kliknij miejsce na mapie lub użyj GPS</div>
     <button class="btn-pozycja" onclick="uzyjMojejPozycji('strefa')">📍 Moja pozycja</button>
   </div>
 
@@ -2263,7 +2262,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 
   <header>
     <div class="ornament">✦ ✦ ✦</div>
-    <h1>Siedliszcze</h1>
+    <h1>Miasto - Siedliszcze</h1>
     <div class="podtytul">mapa miejsc</div>
   </header>
 
@@ -2305,7 +2304,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
       <div class="gps-btn" id="gpsBtn" onclick="togglePozycja()" title="Włącz nawigację">🧭</div>
       <div class="mapa-btn" id="mapaBtn" onclick="przelaczMape()" title="Przełącz na widok satelitarny">🛰️</div>
       <div class="center-btn" id="centerBtn" onclick="wysrodkujNaMnie()" title="Wyśrodkuj na mojej pozycji" style="display: none;">⊙</div>
-      <div class="gps-btn tlo-btn" id="tloBtn" onclick="przelaczTloAudio()" title="Dźwięk stref: wyłączony — słychać tylko kropki (kliknij, aby włączyć)" style="">👂</div>
+      <div class="gps-btn tlo-btn" id="tloBtn" onclick="przelaczTloAudio()" title="Dźwięk stref: wyłączony (kliknij, aby włączyć)" style="display:none">👂</div>
       <div class="gps-status" id="gpsStatus"></div>
     </div>
 
@@ -2320,73 +2319,68 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
         </div>
         <div class="menu-kreska"></div>
         <div class="menu-stack">
-          <button onclick="menuDodaj('yt')" data-tryb="yt">🎬 Dodaj film YouTube</button>
-          <button onclick="menuDodaj('360')" data-tryb="360">📷 Dodaj zdjęcie</button>
-          <button onclick="menuDodaj('audio')" data-tryb="audio">🎧 Dodaj kropkę audio</button>
+          <button onclick="menuDodaj('miejsce')" data-tryb="miejsce">🏛️ Miejsce</button>
+          <button onclick="menuDodaj('strefa')" data-tryb="strefa">🌳 Strefa tła</button>
           <button onclick="menuDodaj('rysuj')" data-tryb="rysuj">🎨 Rysuj na mapie</button>
-          <button onclick="menuDodaj('miejsce')" data-tryb="miejsce">🏛️ Miejsce (wszystko naraz)</button>
         </div>
         <!-- Pędzel kategorii w wersji mobilnej - renderowany razem z desktopowym -->
         <div class="kat-pedzle ma" id="katPedzleMobile">
-    <button class="kat-kw" title="Szkoły" onclick="wybierzPedzel('k1783515070547')">Szkoły</button></div>
+    <button class="kat-kw" title="zabytek" onclick="wybierzPedzel('k1783358052016')">zabytek</button>
+    <button class="kat-kw" title="dupa" onclick="wybierzPedzel('k1783358645120')">dupa</button>
+    <button class="kat-kw" title="lisć" onclick="wybierzPedzel('k1783358670120')">lisć</button></div>
       </div>
 
       <div class="sidebar-tytul" id="sidebarTytulMiejsca">❦ Miejsca ❦</div>
 
       <!-- OPIS MIEJSCOWOŚCI - osobna karta, ZAWSZE pierwsza na liście, bez punktu na mapie -->
-      <div id="opisMiejscowosciKarta" style=""><div class="miejsce-card karta-opis-miasta">
-      <button class="btn-opis-miasta" onclick="toggleOpisMiejscowosci()">🏘️ Opis miejscowości</button>
-      
-    </div></div>
+      <div id="opisMiejscowosciKarta"></div>
 
       <!-- PĘDZEL KATEGORII (admin, komputer) - zaznacz nazwę, a każdy nowo
            dodany punkt dostanie tę kategorię. Klik na 🏷 przy karcie
            miejsca przemalowuje je aktywnym pędzlem. Tylko admin - gość
            ma swój własny rządek niżej (filtryKat, do filtrowania). -->
       <div class="kat-pedzle ma" id="katPedzle">
-    <button class="kat-kw" title="Szkoły" onclick="wybierzPedzel('k1783515070547')">Szkoły</button></div>
+    <button class="kat-kw" title="zabytek" onclick="wybierzPedzel('k1783358052016')">zabytek</button>
+    <button class="kat-kw" title="dupa" onclick="wybierzPedzel('k1783358645120')">dupa</button>
+    <button class="kat-kw" title="lisć" onclick="wybierzPedzel('k1783358670120')">lisć</button></div>
 
       <!-- FILTRY KATEGORII - tylko tryb wędrowca (gość). Pokazywane przez JS. -->
       <div id="filtryKategorii" style="display:none">
         <!-- WARSTWY KATEGORII (pojawiają się tylko, gdy mapa ma kategorie) -->
         <div class="filtry-kat ma" id="filtryKat">
-    <button class="kat-kw aktywny" title="Szkoły" onclick="przelaczFiltrKat('k1783515070547')">Szkoły</button></div>
+    <button class="kat-kw aktywny" title="zabytek" onclick="przelaczFiltrKat('k1783358052016')">zabytek</button>
+    <button class="kat-kw aktywny" title="dupa" onclick="przelaczFiltrKat('k1783358645120')">dupa</button>
+    <button class="kat-kw aktywny" title="lisć" onclick="przelaczFiltrKat('k1783358670120')">lisć</button></div>
       </div>
 
-      <div id="lista-miejsc"><div class="miejsce-card" id="karta-msc-1783515494851">
-          <div class="karta-podglad-wrap" onclick="event.stopPropagation();toggleRozwinMiejsce('msc-1783515494851')">
-            <img class="karta-podglad-miniaturka" alt="" src="img/liceum.webp" onerror="this.onerror=null;this.src='img/liceum.png';this.onerror=function(){this.onerror=null;this.src='img/liceum.webp';this.onerror=function(){this.style.display='none';};};" style="display: none;">
-            <div class="nazwa karta-glowka">
-              <span class="karta-badge smiejsce">📍</span>
-              <span class="karta-nazwa-tekst">liceum</span>
-            </div>
-            <div class="karta-podglad-opis">Brak opisu.</div>
-          </div><div class="karta-akcje">
-    <button class="karta-akcja-btn" title="Kategoria: pomaluj aktywnym pędzlem" onclick="event.stopPropagation();przemalujMiejsce('msc-1783515494851')">🏷</button>
-    <button class="karta-akcja-btn" title="Edytuj" onclick="event.stopPropagation();edytujZListy('msc-1783515494851')">🛠</button>
-    <button class="karta-akcja-btn karta-akcja-usun" title="Usuń" onclick="event.stopPropagation();usunZListy('msc-1783515494851')">🗑</button></div></div><div class="miejsce-card" id="karta-msc-1783516413867">
-          <div class="karta-podglad-wrap" onclick="event.stopPropagation();toggleRozwinMiejsce('msc-1783516413867')">
-            <img class="karta-podglad-miniaturka" alt="" src="img/podstawowa.webp" onerror="this.onerror=null;this.src='img/podstawowa.png';this.onerror=function(){this.onerror=null;this.src='img/podstawowa.webp';this.onerror=function(){this.style.display='none';};};" style="display: none;">
-            <div class="nazwa karta-glowka">
-              <span class="karta-badge smiejsce">📍</span>
-              <span class="karta-nazwa-tekst">szkoła podstawowa</span>
-            </div>
-            <div class="karta-podglad-opis">Historia Szkoły Podstawowej w Siedliszczu sięga bardzo odległych lat. Już w roku 1894 tutaj istniała i rozwijała swoją działalność…</div>
-          </div><div class="karta-akcje">
-    <button class="karta-akcja-btn" title="Kategoria: pomaluj aktywnym pędzlem" onclick="event.stopPropagation();przemalujMiejsce('msc-1783516413867')">🏷</button>
-    <button class="karta-akcja-btn" title="Edytuj" onclick="event.stopPropagation();edytujZListy('msc-1783516413867')">🛠</button>
-    <button class="karta-akcja-btn karta-akcja-usun" title="Usuń" onclick="event.stopPropagation();usunZListy('msc-1783516413867')">🗑</button></div></div><div class="miejsce-card"><div class="nazwa"><span class="karta-badge stlo">🌳</span>cos</div>
-          <div class="opis">🗣️ Komunikat głosowy · okrąg, zasięg 990 m</div><div class="karta-akcje">
-    <button class="karta-akcja-btn" title="Kategoria: pomaluj aktywnym pędzlem" onclick="event.stopPropagation();przemalujMiejsce('strefa-1783527455676')">🏷</button>
-    <button class="karta-akcja-btn" title="Edytuj" onclick="event.stopPropagation();edytujZListy('strefa-1783527455676')">🛠</button>
-    <button class="karta-akcja-btn karta-akcja-usun" title="Usuń" onclick="event.stopPropagation();usunZListy('strefa-1783527455676')">🗑</button></div></div></div>
+      <div id="lista-miejsc"><div class="miejsce-card" id="karta-msc-1783359154632">
+        <div class="nazwa karta-glowka" onclick="event.stopPropagation();toggleRozwinMiejsce('msc-1783359154632')">
+          <span class="karta-badge smiejsce">📍</span>
+          <span class="karta-nazwa-tekst">Krynica</span>
+          <span class="karta-miniaturka-brak">🖼️</span>
+        </div>
+        <div class="karta-podglad-opis" onclick="event.stopPropagation();toggleRozwinMiejsce('msc-1783359154632')">Kościół i klasztor franciszkanów zostały ufundowane w 1448 r. przez ostatniego księcia opawsko-głubczyckiego z rodu Przemyślidów – Jana Pobożnego. Istniejący obecnie kompleks powstał w latach 1753–70 wg projektu Jana Innocentego Töppera z Prudnika. Obejmuje on budynek klasztoru w formie czworoboku z wirydarzem pośrodku oraz barokowy kościół pw. św św. Idziego i Bernardyna. Nad portalem kościoła dostrzec można płaskorzeźbione godło zakonu franciszkanów: skrzyżowane ramiona Chrystusa i św. Franciszka z Asyżu. Wystrój jednonawowej świątyni utrzymany jest w stylu barokowo-rokokowym. Do klasztoru przylega budynek wzniesiony w 1752 r., w którym niegdyś mieściło się gimnazjum.</div>
+        <div class="karta-akcje">
+    <button class="karta-akcja-btn" title="Kategoria: pomaluj aktywnym pędzlem" onclick="event.stopPropagation();przemalujMiejsce('msc-1783359154632')">🏷</button>
+    <button class="karta-akcja-btn" title="Edytuj" onclick="event.stopPropagation();edytujZListy('msc-1783359154632')">🛠</button>
+    <button class="karta-akcja-btn karta-akcja-usun" title="Usuń" onclick="event.stopPropagation();usunZListy('msc-1783359154632')">🗑</button></div></div><div class="miejsce-card" id="karta-msc-1783379723883">
+        <div class="nazwa karta-glowka" onclick="event.stopPropagation();toggleRozwinMiejsce('msc-1783379723883')">
+          <span class="karta-badge smiejsce">📍</span>
+          <span class="karta-nazwa-tekst">bagno</span>
+          <span class="karta-miniaturka-brak">🖼️</span>
+        </div>
+        <div class="karta-podglad-opis" onclick="event.stopPropagation();toggleRozwinMiejsce('msc-1783379723883')">Brak opisu.</div>
+        <div class="karta-akcje">
+    <button class="karta-akcja-btn" title="Kategoria: pomaluj aktywnym pędzlem" onclick="event.stopPropagation();przemalujMiejsce('msc-1783379723883')">🏷</button>
+    <button class="karta-akcja-btn" title="Edytuj" onclick="event.stopPropagation();edytujZListy('msc-1783379723883')">🛠</button>
+    <button class="karta-akcja-btn karta-akcja-usun" title="Usuń" onclick="event.stopPropagation();usunZListy('msc-1783379723883')">🗑</button></div></div></div>
     </aside>
   </div>
 
   <!-- PANEL SZCZEGÓŁÓW (film / panorama / opis) - pod mapą / pełny ekran na telefonie -->
-  <div id="detailPanel" class="">
+  <div id="detailPanel">
     <div class="detail-header">
-      <h2 id="detailTytul">📜 szkoła podstawowa</h2>
+      <h2 id="detailTytul">Szczegóły</h2>
       <button class="detail-close" onclick="zamknijDetail()" aria-label="Zamknij">×</button>
     </div>
     <div id="detailTrasa"></div>
@@ -2394,7 +2388,7 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
   </div>
 
   <!-- OPIS STRONY pod mapą (komputer). Na telefonie ukryty - jest w prawym hamburgerze. -->
-  <div id="opisStronyPodMapa"><div class="detail-opis"><p>Gmina Siedliszcze położona jest w zachodniej części pow. chełmskiego w woj. Lubelskim. Od zachodu graniczy z gminami: Puchaczów, Milejów i od północy z gmina Cyców, od wschodu z gminami Wierzbica i Chełm, od południa z gminą Rejowiec Fabryczny.<br>Powierzchnia gminy wynosi 153,9 km2. Średnia gęstość zaludnienia wynosi 47 osób na km2. Sieć osadniczą tworzy 34 miejscowości (wsi), z których wyodrębniono 28 sołectw.<br>Sieć osadnicza gminy Siedliszcze charakteryzuje się dużym rozproszeniem zabudowy, tzw. zabudowa kolonijna występuje w 28 wsiach. Typowy układ liniowy, wzdłuż symetrycznie położonej drogi mają wsie: Mogielnica, Bezek, Majdan Zahorodyński. Osada Siedliszcze będąca w latach 1760-1821 miasteczkiem, zachowała promieniście rozchodzący się układ ulic. Do najludniejszych wsi należą: Siedliszcze, Bezek, Nowe Chojno oraz Wola Korybutowa. Siedzibą gminy jest miejscowość Siedliszcze, która pełni funkcję ośrodka administracyjnego, handlowo-usługowego i kulturalnego dla mieszkańców</p></div></div>
+  <div id="opisStronyPodMapa"><div class="detail-opis"><p>zapomniane źródła</p></div></div>
 
   <footer>Skarbiec · fundament wyglądu</footer>
 </div>
@@ -2418,8 +2412,8 @@ document.addEventListener('DOMContentLoaded', odswiezLicznikPobran);
 
 
 <!-- Osadzone miejsca (wypełniane przy "Zapisz HTML"). Pusta tablica = brak. -->
-<script id="daneMiejsc" type="application/json">[{"typ":"miejsce","nazwa":"liceum","maMp3":false,"plik":"liceum","fotoTyp":"zwykle","pozycja":[51.19737596471612,23.17286592723577],"klucz":"msc-1783515494851","zasieg":50,"link":"https://www.youtube.com/watch?v=MnyjEJLsi7M","kat":"k1783515070547","opis":""},{"klucz":"msc-1783516413867","pozycja":[51.198520416869876,23.16029870513376],"zasieg":50,"link":"https://www.youtube.com/watch?v=PV2SlTtlITk","kat":"k1783515070547","opis":"Historia Szkoły Podstawowej w Siedliszczu sięga bardzo odległych lat. Już w roku 1894 tutaj istniała i rozwijała swoją działalność. Wiemy o tym ze wspomnień sędziwych ludzi, którzy do niej uczęszczali. W 1894 r. szkoła siedliska była instytucją już ukształtowaną. Istniała jako szkoła rosyjska, z rosyjskim językiem nauczania...\nDnia 17 listopada 2004 roku Zespół Szkół w Siedliszczu otrzymał akt nadania imienia Henryka Sienkiewicza uchwalony przez Radę Gminy w Siedliszczu. Dotychczas jedynie Szkoła Podstawowa, wchodząca w skład zespołu posiadała imię tego pisarza. Rozszerzenie odbyło się na wniosek Dyrektora Szkoły, nauczycieli, rodziców oraz całej społeczności uczniowskiej.","typ":"miejsce","nazwa":"szkoła podstawowa","plik":"podstawowa","maMp3":false,"fotoTyp":"zwykle"},{"klucz":"strefa-1783527455676","typ":"audio","podtyp":"tlo","ksztalt":"kolo","zasieg":990,"nazwa":"cos","zrodloTla":"mowa","plik":null,"tekstMowa":"coś","punkty":null,"pozycja":[51.77890651748928,17.239746227860454]}]</script>
-<script id="daneStrony" type="application/json">{"tytul":"Siedliszcze","opis":"Gmina Siedliszcze położona jest w zachodniej części pow. chełmskiego w woj. Lubelskim. Od zachodu graniczy z gminami: Puchaczów, Milejów i od północy z gmina Cyców, od wschodu z gminami Wierzbica i Chełm, od południa z gminą Rejowiec Fabryczny.\nPowierzchnia gminy wynosi 153,9 km2. Średnia gęstość zaludnienia wynosi 47 osób na km2. Sieć osadniczą tworzy 34 miejscowości (wsi), z których wyodrębniono 28 sołectw.\nSieć osadnicza gminy Siedliszcze charakteryzuje się dużym rozproszeniem zabudowy, tzw. zabudowa kolonijna występuje w 28 wsiach. Typowy układ liniowy, wzdłuż symetrycznie położonej drogi mają wsie: Mogielnica, Bezek, Majdan Zahorodyński. Osada Siedliszcze będąca w latach 1760-1821 miasteczkiem, zachowała promieniście rozchodzący się układ ulic. Do najludniejszych wsi należą: Siedliszcze, Bezek, Nowe Chojno oraz Wola Korybutowa. Siedzibą gminy jest miejscowość Siedliszcze, która pełni funkcję ośrodka administracyjnego, handlowo-usługowego i kulturalnego dla mieszkańców","opisYT":"https://www.youtube.com/watch?v=oe_AwjnioMI&t=84s","autor":"mini - klik.pl","intro":true,"kategorie":[{"nazwa":"Szkoły","id":"k1783515070547"}]}</script>
+<script id="daneMiejsc" type="application/json">[{"typ":"miejsce","kat":"k1783358052016","nazwa":"Krynica","plik":"2","link":"https://www.youtube.com/watch?v=EkKK4IQakP0","fotoTyp":"zwykle","maMp3":true,"opis":"Kościół i klasztor franciszkanów zostały ufundowane w 1448 r. przez ostatniego księcia opawsko-głubczyckiego z rodu Przemyślidów – Jana Pobożnego. Istniejący obecnie kompleks powstał w latach 1753–70 wg projektu Jana Innocentego Töppera z Prudnika. Obejmuje on budynek klasztoru w formie czworoboku z wirydarzem pośrodku oraz barokowy kościół pw. św św. Idziego i Bernardyna. Nad portalem kościoła dostrzec można płaskorzeźbione godło zakonu franciszkanów: skrzyżowane ramiona Chrystusa i św. Franciszka z Asyżu. Wystrój jednonawowej świątyni utrzymany jest w stylu barokowo-rokokowym. Do klasztoru przylega budynek wzniesiony w 1752 r., w którym niegdyś mieściło się gimnazjum.","zasieg":50,"klucz":"msc-1783359154632","pozycja":[53.11665267739275,15.789550915360453]},{"typ":"miejsce","kat":"k1783358670120","nazwa":"bagno","plik":"3","link":"https://www.youtube.com/watch?v=EkKK4IQakP0","fotoTyp":"zwykle","maMp3":true,"opis":"","zasieg":50,"klucz":"msc-1783379723883","pozycja":[53.12078133340499,15.923171999165792]}]</script>
+<script id="daneStrony" type="application/json">{"tytul":"Miasto - Siedliszcze","opis":"zapomniane źródła","autor":"mini - klik.pl","intro":true,"kategorie":[{"id":"k1783358052016","nazwa":"zabytek"},{"id":"k1783358645120","nazwa":"dupa"},{"id":"k1783358670120","nazwa":"lisć"}]}</script>
 
 <script>
 // ============================================================
@@ -2776,26 +2770,19 @@ function ukryjInfo() {
 // Z menu mobilnego (hamburger) - wybór co dodać
 function menuDodaj(typ) {
   if (typeof zamknijPanel === 'function') zamknijPanel(); // zamknij wysuwane menu
-  if (typ === 'yt') wlaczTrybDodawaniaYT();
-  else if (typ === '360') wlaczTrybDodawania360();
-  else if (typ === 'audio') wlaczTrybDodawaniaAudio();
-  else if (typ === 'rysuj') toggleRysowanie();
+  if (typ === 'rysuj') toggleRysowanie();
   else if (typ === 'miejsce') wlaczTrybDodawaniaMiejsce();
+  else if (typ === 'strefa') wlaczTrybDodawaniaStrefy();
   else if (typ === 'tytul') otworzPanelTytul();
   else if (typ === 'kategorie') otworzPanelKategorie();
 }
 
 // ============================================================
-// TRYB ADMIN (?admin=1) - pokazuje pasek edytora
-// UWAGA: to program TYLKO do edycji z komputera - na telefonie/tablecie
-// (dotyk + mały ekran) admin jest zablokowany, nawet z ?admin=1 w adresie.
+// TRYB ADMIN (?admin=1) - pokazuje pasek edytora. Działa na komputerze
+// I na telefonie/tablecie - do montowania miejsc bezpośrednio w terenie.
 // ============================================================
-const probaAdminNaTelefonie = new URLSearchParams(window.location.search).get('admin') === '1' && czyDotyk();
-const isAdmin = new URLSearchParams(window.location.search).get('admin') === '1' && !czyDotyk();
+const isAdmin = new URLSearchParams(window.location.search).get('admin') === '1';
 if (isAdmin) document.body.classList.add('tryb-admin');
-if (probaAdminNaTelefonie) {
-  setTimeout(() => alert('⚠️ Tryb edycji jest dostępny tylko na komputerze.\n\nNa telefonie/tablecie zawsze otwiera się zwykły widok mapy.'), 300);
-}
 
 // ============================================================
 // MIEJSCA - dane + zapis w localStorage
@@ -3292,10 +3279,11 @@ function syncPrzyciski() {
     '360': !!trybDodawania360,
     audio: !!trybDodawaniaAudio,
     rysuj: !!(typeof trybRysowaniaWlaczony !== 'undefined' && trybRysowaniaWlaczony),
-    miejsce: !!trybDodawaniaMiejsce
+    miejsce: !!trybDodawaniaMiejsce,
+    strefa: !!trybDodawaniaStrefy
   };
   // pasek (przyciski po ID)
-  const mapaBtn = { yt:'btnYT', '360':'btn360', audio:'btnAudio', rysuj:'btnRysuj', miejsce:'btnMiejsce' };
+  const mapaBtn = { yt:'btnYT', '360':'btn360', audio:'btnAudio', rysuj:'btnRysuj', miejsce:'btnMiejsce', strefa:'btnStrefa' };
   Object.keys(mapaBtn).forEach(k => {
     const b = document.getElementById(mapaBtn[k]);
     if (b) b.classList.toggle('aktywny', stan[k]);
@@ -5402,7 +5390,12 @@ function ikonaMiejsce(m) {
       return { px: 18, ax: 9, ay: 9, html: `<div class="znacznik-kropka" onclick="${onclickJS}"></div>` };
     }
     if (znacznik === 'x') {
-      return { px: 24, ax: 12, ay: 12, html: `<div class="znacznik-x" onclick="${onclickJS}">✕</div>` };
+      return { px: 24, ax: 12, ay: 12, html: `<div class="znacznik-x" onclick="${onclickJS}">
+          <svg width="22" height="22" viewBox="0 0 24 24">
+            <line x1="4" y1="4" x2="20" y2="20" stroke="#e0a955" stroke-width="4" stroke-linecap="round"/>
+            <line x1="20" y1="4" x2="4" y2="20" stroke="#e0a955" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>` };
     }
     const px = 34;
     return { px, ax: px/2, ay: px, html: `<div class="pin-miejsce-inner" style="width:${px}px;height:${px}px" onclick="${onclickJS}">📍</div>` };
@@ -6317,7 +6310,6 @@ renderujStrone();
 warstwaRysunkow.addTo(mapa);
 przerysujRysunki();
 </script>
-
 
 
 
