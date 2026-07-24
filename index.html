@@ -2169,6 +2169,14 @@ function czytajWiersz(){
     zatrzymajDzwiek();
     return;
   }
+  // jeśli leci audio autora — zatrzymaj je, zanim zacznie się czytanie
+  if(audioEl && !audioEl.paused){
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    audioEl = null;
+    const ba = document.getElementById('btn-audio');
+    if(ba){ ba.classList.remove('playing'); ba.textContent = '🎧 Audio autora'; }
+  }
   try{ speechSynthesis.cancel(); }catch(e){}
   const w = dane.wiersze[stan.slug];
   if(!_glosyZaladowane) _wybierzGlosPolski();
