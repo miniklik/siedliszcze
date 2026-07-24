@@ -5,19 +5,19 @@
   "opis": "Miasteczko nad zalewem Majdan Zahorodyński, 23 km od Chełma. Miejsce, wokół którego od pokoleń krąży lokalna poezja — o zalewie, drodze na rynek i ciszy przedmieścia.",
   "lat": 51.19444,
   "lng": 23.16389,
-  "zdjecie": "sdl",
+  "zdjecie": "sdl.jpg",
   "artysci": [
     {
       "slug": "halina-wierzbicka",
       "imie_nazwisko": "Halina Wierzbicka",
       "lata": "1932–2011",
-      "zdjecie": "halina",
+      "zdjecie": "halina.jpg",
       "bio": "Urodzona w Siedliszczu, związana z miasteczkiem przez całe życie. Pracowała jako nauczycielka, pisała po godzinach — głównie o zalewie i codzienności małego miasta. Jej wiersze krążyły w rękopisach i lokalnym biuletynie, zanim trafiły do jednego, wydanego pośmiertnie tomiku.",
       "tomiki": [
         {
           "slug": "cisza-po-drodze",
           "tytul": "Cisza po drodze",
-          "okladka": "cisza",
+          "okladka": "cisza.jpg",
           "wiersze": [
             {
               "slug": "nad-zalewem",
@@ -25,7 +25,7 @@
               "tresc": "Woda tu inaczej milczy niż w mieście,\nrozkłada się płasko pod ciężarem nieba.\nWracam tu co roku po to samo miejsce,\ngdzie brzeg pamięta więcej, niż potrzeba.\n\nRybak stoi w bezruchu jak część krajobrazu,\nzalew liczy fale, których nikt nie liczy.\nJa przychodzę bez wędki, bez planu, bez razu —\ntylko żeby posłuchać tej ciszy.",
               "data_powstania": "1987",
               "zrodlo": "tomik „Cisza po drodze”, wyd. pośmiertne 2012",
-              "audio": "audio",
+              "audio": "audio.mp3",
               "miejsca": [
                 {
                   "nazwa": "Zalew Majdan Zahorodyński",
